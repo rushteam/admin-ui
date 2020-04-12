@@ -1,1 +1,2 @@
 # admin-ui
+use AMis
