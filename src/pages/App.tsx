@@ -12,6 +12,8 @@ import { MainStore } from '../stores/index';
 import { Route, Switch, Redirect, BrowserRouter as Router, HashRouter } from "react-router-dom";
 import Login from './login/login';
 
+import mockData from '../mock/index';
+
 //import './utils/polyfill';
 // import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
