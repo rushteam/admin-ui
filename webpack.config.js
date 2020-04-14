@@ -68,8 +68,7 @@ module.exports = {
       rewrites: [{ from: /^\/(login|admin.*)$/, to: "/index.html" }]
     },
     before(app) {
-           apiMocker(app, path.resolve("./mock/index.js"));
-          //  apiMocker(app, path.resolve("./mocker/index.js"));
+          //  apiMocker(app, path.resolve("./mock/index.js"));
     },
     proxy: {
       // '/api': 'http://localhost:3000'
