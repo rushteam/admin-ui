@@ -53,7 +53,7 @@ export default function():JSX.Element {
             }
 
             data && (config.data = data);
-            url = "" + url
+            url = "http://rap2.taobao.org:38080/app/mock/250494" + url
             return axios(url, config);
         },
         isCancel: (e:any) => axios.isCancel(e),

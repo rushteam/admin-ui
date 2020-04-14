@@ -1,6 +1,6 @@
 // import filter = require('lodash/filter');
 import * as React from 'react';
-import AMisRenderer from '../../components/AMisRender';
+import AMisRender from '../../components/AMisRender';
 import { inject, observer } from 'mobx-react';
 import { IMainStore } from '../../stores/index';
 import { RouteComponentProps, withRouter } from 'react-router';
@@ -76,7 +76,7 @@ export default class LoginRoute extends React.Component<LoginProps> {
         const history = this.props.history
 
         store.user.login(value.username)
-        history.replace(`/admin`)
+        history.replace(`/index`)
     }
 
     render() {
@@ -84,7 +84,7 @@ export default class LoginRoute extends React.Component<LoginProps> {
             <div className="app app-header-fixed ">
                 <div className="container w-xxl w-auto-xs">
                     <a className="block m-t-xxl m-b-xl text-center text-2x">登录</a>
-                    <AMisRenderer onFinished={this.handleFormSaved} schema={schema}/>
+                    <AMisRender onFinished={this.handleFormSaved} schema={schema}/>
                 </div>
             </div>
         )
