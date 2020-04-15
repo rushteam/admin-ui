@@ -75,15 +75,15 @@ export default function():JSX.Element {
                         <Redirect to={`/login`} from={`/`} exact />
                         <Route path={`/login`} exact component={Login} />
                         <Route path={`/index`} component={Index} />
-                        {/* <Route path={`/register`} exact component = { Register } />
+                        {/* <Route path={`/register`} exact component = { Register } /> */}
 
             {store.user.isAuthenticated ? (
-            <Route path= {`/admin`} component = { AdminRoute } />
+            <Route path= {`/index`} component = { Index } />
             ) : (
             <Route path= "*" exact component = { Login } />
             )}
 
-            <Route component={ NotFound } /> */}
+            {/* <Route component={ NotFound } /> */}
                     </Switch>
                 </div>
             </Router>
