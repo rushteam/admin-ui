@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { IMainStore } from '../../stores/index';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, Route, Link, Switch, Redirect, matchPath } from 'react-router-dom';
+import { mapTree } from 'amis/lib/utils/helper';
 
 import {
     Layout,
@@ -37,16 +38,51 @@ const navigations: Array<NavItem> = [
         ]
     },
 ];
+function navigations2route(pathPrefix = '') {
+    let routes: Array<JSX.Element> = [];
+    navigations.forEach(root => {
+        root.children && mapTree(root.children, (item: any) => {
+            if (item.path && item.component) {
+                routes.push(
+                    <Route
+                        key={routes.length + 1}
+                        path={item.path[0] === '/' ? (item.path) : `${pathPrefix}/${item.path}`}
+                        component={item.component}
+                        exact
+                    />
+                )
+            } else if (item.path && item.getComponent) {
+                routes.push(
+                    <Route
+                        key={routes.length + 1}
+                        path={item.path[0] === '/' ? (item.path) : `${pathPrefix}/${item.path}`}
+                        getComponent={item.getComponent}
+                        exact
+                    />
+                )
+            }
+        });
+    });
+    return routes;
+}
+
+function isActive(link: any, location: any) {
+    const ret = matchPath(location.pathname, {
+        path: link ? link.replace(/\?.*$/, '') : '',
+        exact: true,
+        strict: true
+    });
+    return !!ret;
+}
 
 @inject("store")
 @observer
 export default class Index extends React.Component<IndexProps> {
     renderHeader() {
         const store = this.props.store;
-
         return (
             <div>
-                {/* <div className={`a-Layout-brandBar`}>
+                <div className={`a-Layout-brandBar`}>
                     <button
                         onClick={store.toggleOffScreen}
                         className="pull-right visible-xs"
@@ -55,7 +91,7 @@ export default class Index extends React.Component<IndexProps> {
                     </button>
                     <div className={`a-Layout-brand`}>
                         <i className="fa fa-paw"></i>
-                        <span className="hidden-folded m-l-sm">AMis Boilerplate</span>
+                        <span className="hidden-folded m-l-sm">AdminUI</span>
                     </div>
                 </div>
                 <div className={`a-Layout-headerBar`}>
@@ -71,11 +107,10 @@ export default class Index extends React.Component<IndexProps> {
                             <i className={store.asideFolded ? 'fa fa-indent' : 'fa fa-dedent'} />
                         </Button>
                     </div>
-
                     <div className="hidden-xs p-t-sm pull-right">
-                        <UserInfo user={store.user} />
+                        {/* <UserInfo user={store.user} /> */}
                     </div>
-                </div> */}
+                </div>
             </div>
         );
     }
@@ -144,9 +179,9 @@ export default class Index extends React.Component<IndexProps> {
                 offScreen={store.offScreen}
             >
                 <Switch>
-                    <Redirect to={`/dashboard`} from={`/`} exact />
+                    {/* <Redirect to={`/dashboard`} from={`/`} exact /> */}
                     {navigations2route()}
-                    <Redirect to={`/404`} />
+                    {/* <Redirect to={`/404`} /> */}
                 </Switch>
             </Layout>
         );

@@ -11,11 +11,10 @@ import axios from 'axios';
 import { MainStore } from '../stores/index';
 import { Route, Switch, Redirect, BrowserRouter as Router, HashRouter } from "react-router-dom";
 import Login from './login/login';
+import Index from './index/index';
 
-import mockData from '../mock/index';
-
-//import './utils/polyfill';
-// import 'font-awesome/css/font-awesome.css';
+// import './utils/polyfill';
+import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'amis/lib/themes/default.css';
 // import './scss/style.scss'
@@ -75,6 +74,7 @@ export default function():JSX.Element {
                     <Switch>
                         <Redirect to={`/login`} from={`/`} exact />
                         <Route path={`/login`} exact component={Login} />
+                        <Route path={`/index`} component={Index} />
                         {/* <Route path={`/register`} exact component = { Register } />
 
             {store.user.isAuthenticated ? (

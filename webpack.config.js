@@ -6,7 +6,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const webpack = require('webpack');
-// const apiMocker = require("mocker-api");
+const apiMocker = require("mocker-api");
 //html-minifier-terser
 module.exports = {
   mode: 'development',
@@ -52,7 +52,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+        test: /\.(png|svg|jpg|gif|woff|woff2?|eot|ttf|otf)\??.*$/,
         use: ["url-loader"]
         // use: ["file-loader"]
       }
@@ -68,7 +68,7 @@ module.exports = {
       rewrites: [{ from: /^\/(login|admin.*)$/, to: "/index.html" }]
     },
     before(app) {
-          //  apiMocker(app, path.resolve("./mock/index.js"));
+           apiMocker(app, path.resolve("./mock/index.js"));
     },
     proxy: {
       // '/api': 'http://localhost:3000'
