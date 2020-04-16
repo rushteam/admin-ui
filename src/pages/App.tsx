@@ -16,8 +16,9 @@ import Index from './index/index';
 // import './utils/polyfill';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
+// import 'bulma/css/bulma.css'
 import 'amis/lib/themes/default.css';
-// import './scss/style.scss'
+import '../styles/app.styl'
 
 export default function():JSX.Element {
     const store = (window as any).store = MainStore.create({}, {
@@ -76,12 +77,11 @@ export default function():JSX.Element {
                         <Route path={`/login`} exact component={Login} />
                         <Route path={`/index`} component={Index} />
                         {/* <Route path={`/register`} exact component = { Register } /> */}
-
-            {store.user.isAuthenticated ? (
-            <Route path= {`/index`} component = { Index } />
-            ) : (
-            <Route path= "*" exact component = { Login } />
-            )}
+                        {store.user.isAuthenticated ? (
+                        <Route path= {`/index`} component = { Index } />
+                        ) : (
+                        <Route path= "*" exact component = { Login } />
+                        )}
 
             {/* <Route component={ NotFound } /> */}
                     </Switch>

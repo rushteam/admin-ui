@@ -3,12 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { IMainStore } from '../../stores/index';
 import { RouteComponentProps, Route, Link, Switch, Redirect, matchPath } from 'react-router-dom';
 import { mapTree } from 'amis/lib/utils/helper';
-
-import {
-    Layout,
-    Button,
-    AsideNav
-} from 'amis';
+import {Layout, Button, AsideNav} from 'amis';
 
 interface IndexProps extends RouteComponentProps<any> {
     store: IMainStore

@@ -44,11 +44,11 @@ module.exports = {
         ]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.styl$/i,
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
-          "sass-loader",
+          "stylus-loader",
         ]
       },
       {
