@@ -1,9 +1,9 @@
 // import filter = require('lodash/filter');
 import * as React from 'react';
-import AMisRender from '../../components/AMisRender';
 import { inject, observer } from 'mobx-react';
-import { IMainStore } from '../../stores/index';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { IMainStore } from '../../stores/index';
+import AMisRender from '../../components/AMisRender';
 
 interface LoginProps extends RouteComponentProps<any> {
     store: IMainStore;

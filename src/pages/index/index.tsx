@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
-import { IMainStore } from '../../stores/index';
 import { RouteComponentProps, Route, Link, Switch, Redirect, matchPath } from 'react-router-dom';
-import { mapTree } from 'amis/lib/utils/helper';
 import {Layout, Button, AsideNav} from 'amis';
+import { mapTree } from 'amis/lib/utils/helper';
+import { IMainStore } from '../../stores/index';
+import PagesAdminUsers from '../admin/users';
+import PagesadminRoles from '../admin/roles';
 
 interface IndexProps extends RouteComponentProps<any> {
     store: IMainStore
@@ -27,8 +29,24 @@ const navigations: Array<NavItem> = [
                 // component: Dashboard
             },
             {
-                label: '表单页面',
-                icon: 'glyphicon glyphicon-edit'
+                label: '后台管理',
+                icon: '',
+                children: [
+                    {
+                        path: '/admin/users',
+                        label: '管理员列表',
+                        component: PagesAdminUsers
+                    },
+                    {
+                        path: '/admin/roles',
+                        label: '角色管理',
+                        component: PagesadminRoles
+                    },
+                    {
+                        path: '/admin/uris',
+                        label: '资源管理',
+                    },
+                ]
             },
         ]
     },
@@ -118,13 +136,10 @@ export default class Index extends React.Component<IndexProps> {
                 key={store.asideFolded ? 'folded-aside' : 'aside'}
                 navigations={navigations}
                 renderLink={({ link, toggleExpand, classnames: cx, depth }: any) => {
-
                     if (link.hidden) {
                         return null;
                     }
-
                     let children = [];
-
                     if (link.children) {
                         children.push(
                             <span
@@ -134,11 +149,9 @@ export default class Index extends React.Component<IndexProps> {
                             ></span>
                         );
                     }
-
                     link.badge && children.push(
                         <b key="badge" className={cx(`AsideNav-itemBadge`, link.badgeClassName || 'bg-info')}>{link.badge}</b>
                     );
-
                     if (link.icon) {
                         children.push(
                             <i key="icon" className={cx(`AsideNav-itemIcon`, link.icon)} />
@@ -148,11 +161,9 @@ export default class Index extends React.Component<IndexProps> {
                             <i key="icon" className={cx(`AsideNav-itemIcon`, link.children ? 'fa fa-folder' : 'fa fa-info')} />
                         )
                     };
-
                     children.push(
                         <span key="label" className={cx('AsideNav-itemLabel')}>{link.label}</span>
                     );
-
                     return link.path
                         ? (link.active ? <a>{children}</a> : <Link to={link.path[0] === '/' ? (link.path) : `/${link.path}`}>{children}</Link>)
                         : (<a onClick={link.onClick ? link.onClick : link.children ? () => toggleExpand(link) : undefined}>{children}</a>);
@@ -161,11 +172,8 @@ export default class Index extends React.Component<IndexProps> {
             />
         );
     }
-
-
     render() {
         const store = this.props.store;
-
         return (
             <Layout
                 aside={this.renderAside()}
@@ -174,7 +182,7 @@ export default class Index extends React.Component<IndexProps> {
                 offScreen={store.offScreen}
             >
                 <Switch>
-                    {/* <Redirect to={`/dashboard`} from={`/`} exact /> */}
+                    <Redirect to={`/dashboard`} from={`/`} exact />
                     {navigations2route()}
                     {/* <Redirect to={`/404`} /> */}
                 </Switch>

@@ -9,7 +9,7 @@ import {
 } from 'amis';
 import axios from 'axios';
 import { MainStore } from '../stores/index';
-import { Route, Switch, Redirect, BrowserRouter as Router, HashRouter } from "react-router-dom";
+import { Route, Switch, Redirect, BrowserRouter as Router } from "react-router-dom";
 import Login from './login/login';
 import Index from './index/index';
 
@@ -53,8 +53,20 @@ export default function():JSX.Element {
             }
 
             data && (config.data = data);
-            url = "http://rap2.taobao.org:38080/app/mock/250494" + url
-            return axios(url, config);
+            if (!/^https?\:\/\//.test(url)) {
+                url = "http://rap2.taobao.org:38080/app/mock/250494" + url
+            }
+            return axios(url, config).then(resp =>{
+                let payload = {
+                    status: resp.data.status,
+                    msg: resp.data.msg,
+                    data: resp.data.data
+                };
+                return {
+                    ...resp,
+                    data: payload
+                }
+            });
         },
         isCancel: (e:any) => axios.isCancel(e),
         notify: (type: 'success' | 'error' | 'info', msg: string) => {
@@ -78,7 +90,7 @@ export default function():JSX.Element {
                         <Route path={`/index`} component={Index} />
                         {/* <Route path={`/register`} exact component = { Register } /> */}
                         {store.user.isAuthenticated ? (
-                        <Route path= {`/index`} component = { Index } />
+                        <Route path= {`/`} component = { Index } />
                         ) : (
                         <Route path= "*" exact component = { Login } />
                         )}
