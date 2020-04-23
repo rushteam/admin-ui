@@ -267,6 +267,42 @@ export default function (props: any): JSX.Element{
                             },
                             {
                                 "type": "button",
+                                "icon": "fa fa-pencil",
+                                "tooltip": "角色",
+                                "level": "link",
+                                "actionType": "drawer",
+                                "drawer": {
+                                    "position": "right",
+                                    "size": "lg",
+                                    "title": "分配角色",
+                                    "body": {
+                                        "type": "form",
+                                        "name": "sample-edit-form",
+                                        "api": "/api/admin/users_roles_save",
+                                        "controls": [
+                                            // {
+                                            //     "type": "alert",
+                                            //     "level": "info",
+                                            //     "body": "因为没有配置 api 接口，不能真正的提交哈！"
+                                            // },
+                                            {
+                                                "name": "uid",
+                                                "label": "UID",
+                                                "type": "static",
+                                            },
+                                            { "type": "divider" },
+                                            {
+                                                "name": "status",
+                                                "label": "状态",
+                                                "type": "select",
+                                                "options": statusOptions,
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "type": "button",
                                 "level": "link",
                                 "icon": "fa fa-times text-danger",
                                 "actionType": "ajax",

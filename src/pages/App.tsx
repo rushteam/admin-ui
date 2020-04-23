@@ -30,14 +30,11 @@ export default function():JSX.Element {
             headers
         }: any) => {
             config = config || {};
-            config.headers = config.headers || {};
+            config.headers = headers || config.headers || {};
             config.withCredentials = true;
-
             if (config.cancelExecutor) {
                 config.cancelToken = new axios.CancelToken(config.cancelExecutor);
             }
-
-            config.headers = headers || {};
             config.method = method;
             if (method === 'get' && data) {
                 config.params = data;
@@ -51,10 +48,12 @@ export default function():JSX.Element {
                 data = JSON.stringify(data);
                 config.headers['Content-Type'] = 'application/json';
             }
+            store.user.token && (config.headers['Authorization'] = "Bearer " + store.user.token);
 
             data && (config.data = data);
             if (!/^https?\:\/\//.test(url)) {
-                url = "http://rap2.taobao.org:38080/app/mock/250494" + url
+                // url = "http://rap2.taobao.org:38080/app/mock/250494" + url
+                url = "http://127.0.0.1:8000/v1" + url
             }
             return axios(url, config).then(resp =>{
                 let payload = {

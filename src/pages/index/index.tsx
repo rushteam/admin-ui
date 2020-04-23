@@ -6,6 +6,7 @@ import { mapTree } from 'amis/lib/utils/helper';
 import { IMainStore } from '../../stores/index';
 import PagesAdminUsers from '../admin/users';
 import PagesadminRoles from '../admin/roles';
+import PagesadminUris from '../admin/uris';
 
 interface IndexProps extends RouteComponentProps<any> {
     store: IMainStore
@@ -45,6 +46,14 @@ const navigations: Array<NavItem> = [
                     {
                         path: '/admin/uris',
                         label: '资源管理',
+                        component: PagesadminUris,
+                        //() => import('../admin/uris')
+                        // component: React.lazy(() => import('../admin/uris'))
+                        // getComponent: () => new Promise(resolve =>
+                        //     (require as any)(['../admin/uris'], (component: any) =>
+                        //         resolve(component.default)
+                        //     )
+                        // )
                     },
                 ]
             },

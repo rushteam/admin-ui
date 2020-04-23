@@ -12,7 +12,7 @@ interface LoginProps extends RouteComponentProps<any> {
 const schema = {
     type: 'form',
     submitText: '登录',
-    api: 'post:/api/admin/login',
+    api: 'post:/api/auth/login',
     wrapWithPanel: false,
     messages: {
         saveSuccess: '登录成功，欢迎光临！'
@@ -74,11 +74,9 @@ export default class LoginRoute extends React.Component<LoginProps> {
     handleFormSaved = (value: any) => {
         const store = this.props.store
         const history = this.props.history
-
-        store.user.login(value.username)
+        store.user.login(value.token, value.username)
         history.replace(`/index`)
     }
-
     render() {
         return (
             <div className="app app-header-fixed ">
