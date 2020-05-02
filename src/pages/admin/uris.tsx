@@ -49,63 +49,33 @@ export default function (props: any): JSX.Element{
                     "body": {
                         "type": "form",
                         "name": "sample-edit-form",
-                        "api": "",
+                        "api": "/api/admin/uris_save",
                         "controls": [
+                            { "type": "divider" },
                             {
-                                "type": "alert",
-                                "level": "info",
-                                "body": "因为没有配置 api 接口，不能真正的提交哈！"
-                            },
-                            {
-                                "type": "text",
-                                "name": "text",
-                                "label": "文本",
-                                "required": true
-                            },
-                            {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "image",
-                                "name": "image",
-                                "label": "图片",
-                                "required": true
-                            },
-                            {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "date",
-                                "name": "date",
-                                "label": "日期",
-                                "required": true
-                            },
-                            {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "select",
                                 "name": "type",
-                                "label": "选项",
-                                "options": [
-                                    {
-                                        "label": "漂亮",
-                                        "value": "1"
-                                    },
-                                    {
-                                        "label": "开心",
-                                        "value": "2"
-                                    },
-                                    {
-                                        "label": "惊吓",
-                                        "value": "3"
-                                    },
-                                    {
-                                        "label": "紧张",
-                                        "value": "4"
-                                    }
-                                ]
-                            }
+                                "label": "类别(Type)",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "uri",
+                                "label": "路径(Uri)",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "method",
+                                "label": "方法(Method)",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "label",
+                                "label": "描述(Label)",
+                                "type": "text",
+                                "required": true
+                            },
                         ]
                     }
                 }
@@ -129,8 +99,8 @@ export default function (props: any): JSX.Element{
                         "type": "text"
                     },
                     {
-                        "name": "group",
-                        "label": "分组",
+                        "name": "type",
+                        "label": "分组(Type)",
                         "type": "text"
                     },
                     {
@@ -144,8 +114,8 @@ export default function (props: any): JSX.Element{
                         "type": "text"
                     },
                     {
-                        "name": "desc",
-                        "label": "描述",
+                        "name": "label",
+                        "label": "描述(Label)",
                         "type": "text"
                     },
                     {
@@ -174,7 +144,7 @@ export default function (props: any): JSX.Element{
                                             { "type": "divider" },
                                             {
                                                 "name": "type",
-                                                "label": "分组",
+                                                "label": "类别(Type)",
                                                 "type": "text",
                                                 "required": true
                                             },
@@ -191,8 +161,8 @@ export default function (props: any): JSX.Element{
                                                 "required": true
                                             },
                                             {
-                                                "name": "desc",
-                                                "label": "描述",
+                                                "name": "label",
+                                                "label": "描述(Label)",
                                                 "type": "text",
                                                 "required": true
                                             },

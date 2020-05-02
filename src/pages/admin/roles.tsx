@@ -51,61 +51,42 @@ export default function (props: any): JSX.Element{
                     "body": {
                         "type": "form",
                         "name": "sample-edit-form",
-                        "api": "",
+                        "api": "/api/admin/roles_save",
                         "controls": [
                             {
-                                "type": "alert",
-                                "level": "info",
-                                "body": "因为没有配置 api 接口，不能真正的提交哈！"
-                            },
-                            {
-                                "type": "text",
-                                "name": "text",
-                                "label": "文本",
+                                "name": "label",
+                                "label": "角色名",
+                                "type": "text",//static
                                 "required": true
                             },
+                            { "type": "divider" },
                             {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "image",
-                                "name": "image",
-                                "label": "图片",
-                                "required": true
-                            },
-                            {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "date",
-                                "name": "date",
-                                "label": "日期",
-                                "required": true
-                            },
-                            {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "select",
-                                "name": "type",
-                                "label": "选项",
-                                "options": [
+                                type: 'tabs',
+                                tabs: [
                                     {
-                                        "label": "漂亮",
-                                        "value": "1"
+                                        title: '菜单权限',
+                                        controls: [
+                                            {
+                                                type: 'tree',
+                                                name: 'menus',
+                                                label: false,
+                                                multiple: true,
+                                                options: menusTree,
+                                            },
+                                        ]
                                     },
                                     {
-                                        "label": "开心",
-                                        "value": "2"
+                                        title: '资源权限',
+                                        controls: [
+                                            {
+                                                type: 'tree',
+                                                name: 'uris',
+                                                label: false,
+                                                multiple: true,
+                                                options: urisTree,
+                                            },
+                                        ]
                                     },
-                                    {
-                                        "label": "惊吓",
-                                        "value": "3"
-                                    },
-                                    {
-                                        "label": "紧张",
-                                        "value": "4"
-                                    }
                                 ]
                             }
                         ]
@@ -131,7 +112,7 @@ export default function (props: any): JSX.Element{
                         "type": "text"
                     },
                     {
-                        "name": "role_label",
+                        "name": "label",
                         "label": "角色名称",
                         "type": "text"
                     },
@@ -169,6 +150,12 @@ export default function (props: any): JSX.Element{
                                                 "name": "role_id",
                                                 "type": "hidden",
                                             },
+                                            {
+                                                "name": "label",
+                                                "label": "角色名",
+                                                "type": "text",//static
+                                                "required": true
+                                            },
                                             { "type": "divider" },
                                             {
                                                 type: 'tabs',
@@ -205,42 +192,12 @@ export default function (props: any): JSX.Element{
                             },
                             {
                                 "type": "button",
-                                "icon": "fa fa-pencil",
-                                "tooltip": "编辑",
-                                "level": "link",
-                                "actionType": "drawer",
-                                "drawer": {
-                                    "position": "right",
-                                    "size": "lg",
-                                    "title": "编辑",
-                                    "body": {
-                                        "type": "form",
-                                        "name": "sample-edit-form",
-                                        "api": "/api/admin/roles_save",
-                                        "controls": [
-                                            {
-                                                "name": "role_id",
-                                                "type": "hidden",
-                                            },
-                                            {
-                                                "name": "role_label",
-                                                "label": "角色名",
-                                                "type": "static",
-                                                "required": true
-                                            },
-                                            { "type": "divider" }
-                                        ]
-                                    }
-                                }
-                            },
-                            {
-                                "type": "button",
                                 "level": "link",
                                 "icon": "fa fa-times text-danger",
                                 "actionType": "ajax",
                                 "tooltip": "删除",
                                 "confirmText": "确认要删除?",
-                                "api": "/api/admin/users_del"
+                                "api": "/api/admin/roles_del"
                             }
                         ]
                     }

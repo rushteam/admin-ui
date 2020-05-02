@@ -19,14 +19,14 @@ export default function (props: any): JSX.Element{
     const genderMaps = {
         "1": "男",
         "2": "女",
-        "*": "未知：${type}"
+        "*": "${type}"
     }
     const statusMaps = {
         "1": "<span class='label label-success'>正常</span>",
         "2": "<span class='label label-danger'>禁用</span>",
         // "2": "<span class='label label-warning'>禁用</span>",
         // "2": "<span class='label label-info'>漂亮</span>",
-        "*": "未知(${type})"
+        "*": "${type}"
     }
     const statusOptions = [
         { "label": "正常","value": "1"},
@@ -48,62 +48,33 @@ export default function (props: any): JSX.Element{
                     "body": {
                         "type": "form",
                         "name": "sample-edit-form",
-                        "api": "",
+                        "api": "/api/admin/users_save",
                         "controls": [
+                            // {
+                            //     "type": "alert",
+                            //     "level": "info",
+                            //     "body": "因为没有配置 api 接口，不能真正的提交哈！"
+                            // },
+                            { "type": "divider" },
                             {
-                                "type": "alert",
-                                "level": "info",
-                                "body": "因为没有配置 api 接口，不能真正的提交哈！"
-                            },
-                            {
+                                "name": "nickname",
+                                "label": "昵称",
                                 "type": "text",
-                                "name": "text",
-                                "label": "文本",
                                 "required": true
                             },
                             {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "image",
-                                "name": "image",
+                                "name": "avatar",
                                 "label": "图片",
-                                "required": true
+                                "type": "image",
+                                "multiple": false,
+                                "required": false
                             },
+                            { "type": "divider" },
                             {
-                                "type": "divider"
-                            },
-                            {
-                                "type": "date",
-                                "name": "date",
-                                "label": "日期",
-                                "required": true
-                            },
-                            {
-                                "type": "divider"
-                            },
-                            {
+                                "name": "status",
+                                "label": "状态",
                                 "type": "select",
-                                "name": "type",
-                                "label": "选项",
-                                "options": [
-                                    {
-                                        "label": "漂亮",
-                                        "value": "1"
-                                    },
-                                    {
-                                        "label": "开心",
-                                        "value": "2"
-                                    },
-                                    {
-                                        "label": "惊吓",
-                                        "value": "3"
-                                    },
-                                    {
-                                        "label": "紧张",
-                                        "value": "4"
-                                    }
-                                ]
+                                "options": statusOptions,
                             }
                         ]
                     }
@@ -127,10 +98,12 @@ export default function (props: any): JSX.Element{
                     {
                         "name": "avatar",
                         "label": "头像",
-                        "type": "image",
-                        "multiple": false,
+                        "type": 'tpl',
+                        "tpl": '<img style="width:30px;" src="${avatar}" />',
+                        // "type": "image",
+                        // "multiple": false,
                         "popOver": {
-                            "title": "查看大图",
+                            "title": "高清",
                             "body": "<div class=\"w-xxl\"><img class=\"w-full\" src=\"${image}\"/></div>"
                         }
                     },
@@ -188,7 +161,7 @@ export default function (props: any): JSX.Element{
                                                 "label": "头像",
                                                 "type": "static-image",
                                                 "popOver": {
-                                                    "title": "查看大图",
+                                                    "title": "高清",
                                                     "body": "<div class=\"w-xxl\"><img class=\"w-full\" src=\"${avatar}\"/></div>"
                                                 }
                                             },
