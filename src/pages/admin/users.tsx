@@ -64,7 +64,7 @@ export default function (props: any): JSX.Element{
                             },
                             {
                                 "name": "avatar",
-                                "label": "图片",
+                                "label": "头像",
                                 "type": "image",
                                 "multiple": false,
                                 "required": false
