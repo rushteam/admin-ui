@@ -17,20 +17,20 @@ import { Schema } from "amis/lib/types";
 // }
 export default function (props: any): JSX.Element{
     const genderMaps = {
-        "1": "男",
-        "2": "女",
+        1: "男",
+        2: "女",
         "*": "${type}"
     }
     const statusMaps = {
-        "1": "<span class='label label-success'>正常</span>",
-        "2": "<span class='label label-danger'>禁用</span>",
+        1: "<span class='label label-success'>正常</span>",
+        2: "<span class='label label-danger'>禁用</span>",
         // "2": "<span class='label label-warning'>禁用</span>",
         // "2": "<span class='label label-info'>漂亮</span>",
         "*": "${type}"
     }
     const statusOptions = [
-        { "label": "正常","value": "1"},
-        { "label": "禁用","value": "2"},
+        { "label": "正常","value": 1},
+        { "label": "禁用","value": 2},
     ]
     const schema: Schema = {
         "$schema": "https://houtai.baidu.com/v2/schemas/page.json#",
@@ -219,7 +219,7 @@ export default function (props: any): JSX.Element{
                                                 "label": "图片",
                                                 "type": "image",
                                                 "multiple": false,
-                                                "required": true
+                                                "required": false
                                             },
                                             {
                                                 "name": "date",
@@ -240,7 +240,7 @@ export default function (props: any): JSX.Element{
                             },
                             {
                                 "type": "button",
-                                "icon": "fa fa-pencil",
+                                "icon": "fa fa-user",
                                 "tooltip": "角色",
                                 "level": "link",
                                 "actionType": "drawer",
@@ -253,11 +253,6 @@ export default function (props: any): JSX.Element{
                                         "name": "sample-edit-form",
                                         "api": "/api/admin/users_roles_save",
                                         "controls": [
-                                            // {
-                                            //     "type": "alert",
-                                            //     "level": "info",
-                                            //     "body": "因为没有配置 api 接口，不能真正的提交哈！"
-                                            // },
                                             {
                                                 "name": "uid",
                                                 "label": "UID",
@@ -265,11 +260,14 @@ export default function (props: any): JSX.Element{
                                             },
                                             { "type": "divider" },
                                             {
-                                                "name": "status",
-                                                "label": "状态",
-                                                "type": "select",
-                                                "options": statusOptions,
-                                            }
+                                                type: 'tree',
+                                                name: 'role_id',
+                                                label: false,
+                                                multiple: true,
+                                                source:"/api/admin/roles",
+                                                valueField:"id",
+                                                // options: rolesTree,
+                                            },
                                         ]
                                     }
                                 }

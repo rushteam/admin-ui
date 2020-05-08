@@ -9,14 +9,17 @@ export default function (props: any): JSX.Element{
         {
             label: 'Folder A',
             value: 1,
+            uri: "/test",
             children: [
                 {
                     label: 'file A',
-                    value: 2
+                    value: 2,
+                    uri: "/test/2"
                 },
                 {
                     label: 'file B',
-                    value: 3
+                    value: 3,
+                    uri: "/test/3"
                 }
             ]
         },
@@ -31,8 +34,8 @@ export default function (props: any): JSX.Element{
     ]
     const urisTree = menusTree
     const statusMaps = {
-        "1": "<span class='label label-success'>正常</span>",
-        "2": "<span class='label label-danger'>禁用</span>",
+        1: "<span class='label label-success'>正常</span>",
+        2: "<span class='label label-danger'>禁用</span>",
         "*": "未知(${type})"
     }
     const schema: Schema = {
@@ -98,16 +101,14 @@ export default function (props: any): JSX.Element{
             {
                 "type": "crud",
                 "api": "/api/admin/roles",
-                "defaultParams": {
-                    "ps": 10
-                },
+                "defaultParams": {},
                 expandConfig: {
                     expand: 'first',
                     accordion: true
                 },
                 "columns": [
                     {
-                        "name": "role_id",
+                        "name": "id",
                         "label": "角色ID",
                         "type": "text"
                     },
@@ -147,7 +148,7 @@ export default function (props: any): JSX.Element{
                                         "api": "/api/admin/roles_save",
                                         "controls": [
                                             {
-                                                "name": "role_id",
+                                                "name": "id",
                                                 "type": "hidden",
                                             },
                                             {
@@ -165,10 +166,11 @@ export default function (props: any): JSX.Element{
                                                         controls: [
                                                             {
                                                                 type: 'tree',
-                                                                name: 'menus',
+                                                                name: 'menu_id',
                                                                 label: false,
                                                                 multiple: true,
                                                                 options: menusTree,
+                                                                joinValues: false,
                                                             },
                                                         ]
                                                     },
@@ -177,10 +179,78 @@ export default function (props: any): JSX.Element{
                                                         controls: [
                                                             {
                                                                 type: 'tree',
-                                                                name: 'uris',
+                                                                name: 'uris_id',
                                                                 label: false,
                                                                 multiple: true,
                                                                 options: urisTree,
+                                                                joinValues:false,
+                                                            },
+                                                        ]
+                                                    },
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "type": "button",
+                                "icon": "fa fa-plus",
+                                "tooltip": "新增子角色",
+                                "level": "link",
+                                "actionType": "drawer",
+                                data: {
+                                    name:"",
+                                    pid:"",
+                                    // "pid":"${id}"
+                                },
+                                "drawer": {
+                                    "position": "right",
+                                    "size": "lg",
+                                    "title": "新增子角色",
+                                    
+                                    "body": {
+                                        "type": "form",
+                                        "name": "sample-add-form",
+                                        "api": "/api/admin/roles_save",
+                                        "controls": [
+                                            {
+                                                "name": "id",
+                                                "type": "hidden",
+                                            },
+                                            {
+                                                "name": "label",
+                                                "label": "角色名",
+                                                "type": "text",//static
+                                                "required": true
+                                            },
+                                            { "type": "divider" },
+                                            {
+                                                type: 'tabs',
+                                                tabs: [
+                                                    {
+                                                        title: '菜单权限',
+                                                        controls: [
+                                                            {
+                                                                type: 'tree',
+                                                                name: 'menu_id',
+                                                                label: false,
+                                                                multiple: true,
+                                                                options: menusTree,
+                                                                joinValues: false,
+                                                            },
+                                                        ]
+                                                    },
+                                                    {
+                                                        title: '资源权限',
+                                                        controls: [
+                                                            {
+                                                                type: 'tree',
+                                                                name: 'uris_id',
+                                                                label: false,
+                                                                multiple: true,
+                                                                options: urisTree,
+                                                                joinValues: false,
                                                             },
                                                         ]
                                                     },
