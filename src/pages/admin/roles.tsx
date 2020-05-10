@@ -199,16 +199,13 @@ export default function (props: any): JSX.Element{
                                 "tooltip": "新增子角色",
                                 "level": "link",
                                 "actionType": "drawer",
-                                data: {
-                                    name:"",
-                                    pid:"",
-                                    // "pid":"${id}"
-                                },
                                 "drawer": {
                                     "position": "right",
                                     "size": "lg",
                                     "title": "新增子角色",
-                                    
+                                    data: {
+                                        "pid":"${id}"
+                                    },
                                     "body": {
                                         "type": "form",
                                         "name": "sample-add-form",
@@ -217,6 +214,11 @@ export default function (props: any): JSX.Element{
                                             {
                                                 "name": "id",
                                                 "type": "hidden",
+                                            },
+                                            {
+                                                "name": "pid",
+                                                "label": "父级",
+                                                "type": "static",
                                             },
                                             {
                                                 "name": "label",
