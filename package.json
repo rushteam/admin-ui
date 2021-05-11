@@ -24,7 +24,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^3.4.1",
     "bulma": "^0.8.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mobx": "^4.15.4",
     "mobx-react": "^5.4.4",
     "mobx-state-tree": "^3.15.0",
