@@ -21,7 +21,7 @@
   "homepage": "https://github.com/rushteam/admin-ui#readme",
   "dependencies": {
     "amis": "^1.0.10",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "bootstrap": "^3.4.1",
     "bulma": "^0.8.2",
     "lodash": "^4.17.15",
